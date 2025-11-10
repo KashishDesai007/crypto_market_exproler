@@ -13,13 +13,15 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 
 export default function FavoritesPage() {
   const { favorites, clearFavorites, selectFavorite, deselectFavorite, selectAllFavorites, deselectAllFavorites, removeSelectedFavorites } = useFavorites();
-  const { data } = useCoins({
-    ...(favorites.ids.length > 0 && { ids: favorites.ids })
-  });
   const {theme} = useTheme()
   const isDark = theme === 'dark';
   const hasSelected = favorites.selectedIds.length > 0;
-  const allSelected = data && data.length > 0 && favorites.selectedIds.length === data.length;
+
+  const { data } = useCoins({ ids: favorites.ids });
+  // Filter data to only include coins whose IDs are in favorites.ids
+  const filteredData = data?.filter((coin: any) => favorites.ids.includes(coin.id)) ?? [];
+  console.log("Favorite Coins Data:", filteredData, favorites.ids.length > 0);
+  const allSelected = filteredData.length > 0 && favorites.selectedIds.length === filteredData.length;
 
   return (
     <>
@@ -30,7 +32,7 @@ export default function FavoritesPage() {
         <div className="flex items-center justify-between mb-6">
           <div className='flex gap-2 items-center'>
            <Link href="/" className="text-blue hover:text-blue-400 transition-colors">
-              <ArrowLeftOutlined />
+              <ArrowLeftOutlined className={  isDark ? 'text-gray-300 hover:text-gray-100' : 'text-gray-700 hover:text-gray-900'}/>
             </Link>
           <h1 className="text-2xl font-semibold">Favorites</h1>
           </div>
@@ -44,14 +46,6 @@ export default function FavoritesPage() {
                 Remove Selected ({favorites.selectedIds.length})
               </Button>
             )}
-            <Button
-              variant="destructive"
-              customSize="sm"
-              disabled={!favorites.ids.length}
-              onClick={clearFavorites}
-            >
-              Clear All
-            </Button>
           </div>
         </div>
 
@@ -74,13 +68,13 @@ export default function FavoritesPage() {
           </div>
         )}
 
-        {!data?.length ? (
+        {!filteredData.length ? (
           <div className="flex items-center justify-center h-[50vh]">
             <Empty description="No favorites yet" />
           </div>
         ) : (
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {data.map((coin: any) => (
+            {filteredData.map((coin: any) => (
               <CoinCard 
                 key={coin.id} 
                 coin={coin} 
@@ -101,5 +95,3 @@ export default function FavoritesPage() {
     </>
   );
 }
-
-

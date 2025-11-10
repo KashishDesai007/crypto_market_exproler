@@ -22,10 +22,11 @@ export const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose, onApp
       className={isDark ? 'dark-theme' : ''}
       styles={{
         content: {
-          background: isDark ? '#1a1a1a' : '#ffffff',
+          background: isDark ? '#071025' : '#ffffff',
+          color: isDark ? '#fff' : '#000',
         },
         header: {
-          background: isDark ? '#1a1a1a' : '#ffffff',
+          background: isDark ? '#071025' : '#ffffff',
           borderBottom: `1px solid ${isDark ? '#333' : '#f0f0f0'}`,
         },
         body: {

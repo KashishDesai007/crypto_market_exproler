@@ -115,8 +115,11 @@ html, body, * {
 .crypto-table-enhanced .ant-table-content {
   border: 0 !important;
 }
-.crypto-table-enhanced .ant-table-thead > tr {
+.theme-light .crypto-table-enhanced .ant-table-thead > tr {
   background: linear-gradient(135deg, #1e40af 0%, #2761ff 100%);
+}
+.theme-dark .crypto-table-enhanced .ant-table-thead > tr {
+  background: linear-gradient(135deg, #050b22 0%, #021544 100%);
 }
 .crypto-table-enhanced .ant-table-thead > tr > th {
   font-weight: 700 !important;
@@ -145,7 +148,7 @@ html, body, * {
   background-color: rgba(248, 250, 252, 0.8);
 }
 
-.theme-light .crypto-table-enhanced .ant-table-tbody tr:hover {
+.theme-light .crypto-table-enhanced .ant-table-tbody tr :hover {
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -154,6 +157,19 @@ html, body, * {
 }
 .theme-dark .crypto-table-enhanced .ant-table-tbody > tr > td {
   border-bottom-color: rgba(75, 85, 99, 0.3) !important;
+}
+.theme-dark .crypto-table-enhanced .ant-table-tbody > tr {
+  border-bottom-color: rgba(75, 85, 99, 0.3) !important;
+  background-color: #0c4958 !important;
+}
+.theme-dark .crypto-table-enhanced .ant-table-tbody > tr:hover,
+.theme-dark .crypto-table-enhanced .ant-table-tbody > tr.ant-table-row:hover {
+  background-color: #09576b !important; /* Use your preferred dark hover color */
+  color: #fff !important;
+  transition: background-color 0.2s;
+}
+.theme-dark .crypto-table-enhanced .ant-table-tbody > tr > td {
+  background-color: transparent !important;
 }
 /* Price change gradient text */
 .price-change-positive {
@@ -205,4 +221,15 @@ textarea::-moz-placeholder {
 .theme-light textarea::-moz-placeholder {
   color: rgba(0, 0, 0, 0.5) !important;
   opacity: 1;
+}
+
+.dark-theme .ant-modal-title {
+  color: #fff !important;
+}
+.dark-theme .ant-modal-close {
+  color: #fff !important;
+}
+
+:where(.css-dev-only-do-not-override-11mmrso).ant-popover .ant-popover-inner {
+  padding: 0 !important;
 }

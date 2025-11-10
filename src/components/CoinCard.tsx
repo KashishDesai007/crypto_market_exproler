@@ -22,7 +22,7 @@ const { theme } = useTheme();
   const isDark = theme === 'dark';
   return (
     <motion.div whileHover={{ scale: 1.02 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
-      <Card className="glass rounded-2xl border-0 overflow-hidden">
+      <Card className="glass rounded-2xl border-0 overflow-hidden !bg-[#0c4958] ">
         <div className="flex items-center gap-3">
           {showCheckbox && (
             <input
@@ -37,10 +37,20 @@ const { theme } = useTheme();
             <Link href={`/coin/${coin.id}`} className="font-semibold hover:underline">
               {coin.name} <span className="text-gray-400 text-sm">{coin.symbol.toUpperCase()}</span>
             </Link>
-            <div className={`text-sm ${ isDark ?"text-gray-300":"text-gray-700"}`}>MCap: ${coin.market_cap.toLocaleString()}</div>
+            <div
+              className={`text-sm ${isDark ? "text-gray-300" : "text-gray-700"} max-w-[130px] truncateoverflow-hidden whitespace-nowrap`}
+              title={`MCap: $${coin.market_cap.toLocaleString()}`}
+            >
+              MCap: ${coin.market_cap.toLocaleString()}
+            </div>
           </div>
           <div className="text-right">
-            <div className="text-lg font-semibold">${coin.current_price.toLocaleString()}</div>
+            <div
+              className="text-lg font-semibold max-w-[120px] truncate overflow-hidden whitespace-nowrap"
+              title={`$${coin.current_price.toLocaleString()}`}
+            >
+              ${coin.current_price.toLocaleString()}
+            </div>
             <div className={
               (coin.price_change_percentage_24h ?? 0) >= 0 ? 'text-emerald' : 'text-red-400'
             }>
@@ -57,5 +67,3 @@ const { theme } = useTheme();
     </motion.div>
   );
 };
-
-

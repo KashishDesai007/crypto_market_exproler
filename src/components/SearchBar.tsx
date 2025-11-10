@@ -22,9 +22,7 @@ export const SearchBar: React.FC<Props> = ({ onSearch, placeholder }) => {
       placeholder={placeholder ?? 'Search by name or symbol...'}
       value={value}
       onChange={(e) => setValue(e?.target?.value)}
-      className="bg-transparent text-white"
+      className="bg-transparent text-black"
     />
   );
 };
-
-

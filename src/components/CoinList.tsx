@@ -35,16 +35,15 @@ export const CoinList: React.FC<Props> = ({ pages, isLoading, isError, hasNextPa
 
   if (isLoading) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 w-full max-w-full">
         <div className="flex justify-end mb-4">
           <ViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
         </div>
-        
         {viewMode === 'grid' ? (
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full min-w-0">
             {Array.from({ length: 9 }).map((_, i) => (
-              <div key={i} className="glass p-4 rounded-2xl">
-                <Skeleton active avatar paragraph={{ rows: 2 }} />
+              <div key={i} className="glass p-4 rounded-2xl w-full">
+                <Skeleton active avatar paragraph={{ rows: 2 }} className="w-full" />
               </div>
             ))}
           </div>
@@ -64,13 +63,12 @@ export const CoinList: React.FC<Props> = ({ pages, isLoading, isError, hasNextPa
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 w-full">
       <div className="flex justify-end mb-4">
         <ViewToggle viewMode={viewMode} onViewModeChange={setViewMode} />
       </div>
-      
       {viewMode === 'grid' ? (
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 w-full min-w-0">
           {items?.map((coin) => (
             <CoinCard key={coin.id} coin={coin} />
           ))}
@@ -78,7 +76,6 @@ export const CoinList: React.FC<Props> = ({ pages, isLoading, isError, hasNextPa
       ) : (
         <CoinTable data={items} loading={isLoading} />
       )}
-
       <div ref={ref} />
       {hasNextPage && (
         <div className="flex justify-center">
@@ -88,5 +85,3 @@ export const CoinList: React.FC<Props> = ({ pages, isLoading, isError, hasNextPa
     </div>
   );
 };
-
-

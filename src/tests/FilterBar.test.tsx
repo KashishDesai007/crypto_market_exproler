@@ -14,8 +14,8 @@ describe('FilterBar', () => {
       </QueryFiltersProvider>
     );
 
-    expect(getByText('Price Range ($)')).toBeInTheDocument();
-    expect(getByText('Market Cap Rank')).toBeInTheDocument();
+    expect(getByText('Price Range ($)')).toBeTruthy();
+    expect(getByText('Market Cap Rank')).toBeTruthy();
 
   });
 });

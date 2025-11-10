@@ -19,9 +19,11 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col w-full">
       <Header scrollPercent={scrollPercent} />
-      {children}
+      <main className="flex-1 w-full">
+        {children}
+      </main>
     </div>
   );
 };

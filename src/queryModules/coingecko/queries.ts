@@ -2,13 +2,17 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { FetchCoinsParams } from "@/types/coin";
 import { fetchCoins, fetchCoinById, fetchCoinMarketChart } from "@/services/coingeckoApi";
 
-export const useCoins = (params: Omit<FetchCoinsParams, 'page' | 'per_page'> = {}) => {
+export const useCoins = (
+  params: Omit<FetchCoinsParams, 'page' | 'per_page'> = {},
+  options?: { enabled?: boolean }
+) => {
   return useQuery({
     queryKey: ["coins", params],
     queryFn: () => fetchCoins({ ...params, page: 1, per_page: 20 }),
     staleTime: 30 * 1000, // 30 seconds
     refetchOnMount: true,
     refetchOnWindowFocus: true,
+    enabled: options?.enabled ?? true,
   });
 };
 

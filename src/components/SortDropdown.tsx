@@ -27,7 +27,7 @@ export const SortDropdown: React.FC<Props> = ({ value, onChange }) => {
   const currentOption = sortOptions.find(opt => opt.value === value);
 
   const content = (
-    <div className={`w-56 p-1 rounded-lg ${isDark ? 'bg-[#1a1a1a]' : 'bg-white'}`}>
+    <div className={`w-56 p-1 rounded-lg ${isDark ? 'bg-[#0c4958]' : 'bg-white'}`}>
       {sortOptions.map((option) => (
         <button
           key={option.value}
@@ -37,7 +37,7 @@ export const SortDropdown: React.FC<Props> = ({ value, onChange }) => {
           }}
           className={`w-full text-left px-3 py-2 rounded-md transition-colors ${
             option.value === value
-              ? (isDark ? 'bg-blue-500/20 text-blue-400' : 'bg-blue-50 text-blue-600')
+              ? (isDark ? 'bg-white text-blue-400' : 'bg-blue-50 text-blue-600')
               : 'hover:bg-gray-100 dark:hover:bg-gray-800'
           }`}
         >

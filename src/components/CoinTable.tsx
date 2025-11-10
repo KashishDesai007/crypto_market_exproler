@@ -1,5 +1,5 @@
-import React from 'react';
-import { Table } from 'antd';
+import React, { useState } from 'react';
+import { Table, Pagination } from 'antd';
 import type { TableProps } from 'antd';
 import { Coin } from '@/types/coin';
 import Image from 'next/image';
@@ -119,35 +119,70 @@ const CoinTable: React.FC<CoinTableProps> = ({ data, loading, height }) => {
     },
   ];
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  // Paginated data
+  const paginatedData = data.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
   return (
-    <div className={`w-full rounded-2xl overflow-hidden ${
-      isDark 
-        ? 'glass' 
-        : 'crypto-table-enhanced border border-blue-700 shadow-lg shadow-blue-500/20 border-[2px] '
-    }`}>
-        <Table<Coin>
-          columns={columns}
-          dataSource={data}
-          loading={loading}
-          rowKey="id"
-          pagination={false}
-          onRow={(record, rowIndex) => ({
-            onClick: () => {
-              window.location.href = `/coin/${record.id}`;
-            },
-            className: `
-              cursor-pointer transition-all duration-300 ease-in-out
-              hover:bg-blue-50/80 hover:shadow-md
-              dark:hover:bg-gray-800/60 dark:hover:shadow-lg
-              border-b border-gray-100 dark:border-gray-700/50
-              group
-            `,
-          })}
-          scroll={{ y: height ?? 480 }}
-          sticky={{ offsetHeader: 0 } as any}
-          style={{ width: '100%' }}
- className="crypto-table-enhanced"
+    <div
+      className={`w-full rounded-2xl overflow-hidden ${
+        isDark
+          ? 'glass'
+          : 'crypto-table-enhanced border border-blue-700 shadow-lg shadow-blue-500/20 border-[2px] '
+      }`}
+      style={{
+        height: 'calc(100vh - 160px)', // Adjust 160px to your header+footer+pagination height
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Table<Coin>
+        columns={columns}
+        dataSource={paginatedData}
+        loading={loading}
+        rowKey="id"
+        pagination={false}
+        onRow={(record, rowIndex) => ({
+          onClick: () => {
+            window.location.href = `/coin/${record.id}`;
+          },
+          className: `
+            cursor-pointer transition-all duration-300 ease-in-out
+            group
+          `,
+        })}
+        scroll={{ y: 'calc(100vh - 260px)' }} // 260px = header+footer+pagination+table header
+        sticky={{ offsetHeader: 0 } as any}
+        style={{ width: '100%' }}
+        className="crypto-table-enhanced"
+      />
+      {/* Pagination at bottom of table */}
+      {/* <div
+        style={{
+          width: '100%',
+          background: isDark ? 'rgba(30,41,59,0.95)' : 'rgba(255,255,255,0.95)',
+          boxShadow: '0 -2px 8px rgba(0,0,0,0.08)',
+          padding: '16px 0',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Pagination
+          current={currentPage}
+          pageSize={pageSize}
+          total={data.length}
+          onChange={(page, size) => {
+            setCurrentPage(page);
+            setPageSize(size ?? 10);
+          }}
+          showSizeChanger
+          pageSizeOptions={['5', '10', '20', '50']}
         />
+      </div> */}
     </div>
   );
 };

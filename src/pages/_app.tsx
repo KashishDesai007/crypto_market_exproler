@@ -11,10 +11,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <link rel="icon" type="image/png" href="/CMX.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/CMX.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/CMX.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/CMX.png" />
+        <link rel="icon" type="image/png" href="/CME.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/CME.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/CME.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/CME.png" />
         <meta name="theme-color" content="#000000" />
       </Head>
       <Providers>

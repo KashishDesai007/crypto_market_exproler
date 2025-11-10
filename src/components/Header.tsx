@@ -34,29 +34,34 @@ export const Header: React.FC<Props> = ({ scrollPercent }) => {
           }`
         }
       >
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/CMX.png"
-              alt="Crypto Market Explorer Logo"
-              width={32}
-              height={32}
-              className="rounded-lg"
-            />
-            <div className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>
-              Crypto Market Explorer
-            </div>
-          </Link>
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col lg:flex-row items-start lg:items-center gap-4">
+          {/* Logo and Title */}
+          <div className="flex items-center gap-3 w-full lg:w-auto">
+            <Link href="/" className="flex items-center gap-3">
+              <Image
+                src="/CME.png"
+                alt="Crypto Market Explorer Logo"
+                width={80}
+                height={50}
+                className="rounded-lg"
+              />
+              <div className={`text-xl font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                Crypto Market Explorer
+              </div>
+            </Link>
+          </div>
 
+          {/* Search Bar */}
           {!isDetailsPage && (
-            <div className="flex-1 max-w-2xl">
+            <div className="w-full sm:w-2/3 md:w-1/2 lg:flex-1 lg:max-w-2xl">
               <SearchBar onSearch={setQuery} />
             </div>
           )}
 
-          <div className="flex items-center gap-3 ml-auto">
+          {/* Actions: Filters, Sort, Favorites, Theme */}
+          <div className="flex flex-col sm:flex-row w-full lg:w-auto gap-2 sm:gap-3 justify-end lg:ml-auto">
             {!isDetailsPage && (
-              <>
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
                 <Button
                   variant="ghost"
                   customSize="sm"
@@ -67,24 +72,26 @@ export const Header: React.FC<Props> = ({ scrollPercent }) => {
                   Filters
                 </Button>
                 <SortDropdown value={sort} onChange={setSort} />
-              </>
+              </div>
             )}
-            <Link 
-              href="/favorites" 
-              className={`flex items-center gap-2 transition-colors ${
-                isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-500'
-              }`}
-            >
-              <HeartFilled className="text-emerald-500" />
-            </Link>
-            <Button
-              variant="ghost"
-              customSize="sm"
-              onClick={toggle}
-              icon={isDark ? <Moon size={16} /> : <Sun size={16} className='text-gray-700'/>}
-              aria-label="Toggle theme"
-              className={isDark ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'}
-            />
+            <div className="flex items-center gap-2 sm:gap-3 mt-2 sm:mt-0">
+              <Link 
+                href="/favorites" 
+                className={`flex items-center gap-2 transition-colors ${
+                  isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-500'
+                }`}
+              >
+                <HeartFilled className="text-emerald-500" />
+              </Link>
+              <Button
+                variant="ghost"
+                customSize="sm"
+                onClick={toggle}
+                icon={isDark ? <Moon size={16} /> : <Sun size={16} className='text-gray-700'/>}
+                aria-label="Toggle theme"
+                className={isDark ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'}
+              />
+            </div>
           </div>
         </div>
           
