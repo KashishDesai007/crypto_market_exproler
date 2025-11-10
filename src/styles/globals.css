@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.accent-gradient {
+  background: linear-gradient(90deg, #10B981, #3B82F6);
+}
+
+/* Theme helpers (light / dark) applied to documentElement by ThemeProvider */
+.theme-dark {
+  --app-bg: #071025;
+  --app-text: #ffffff;
+  background-color: var(--app-bg);
+  color: var(--app-text);
+}
+
+.theme-light {
+  --app-bg: #f8fafc;
+  --app-text: #0b1220;
+  background-color: var(--app-bg);
+  color: var(--app-text);
+}
+
+/* Small progress bar under header */
+.scroll-progress {
+  height: 2px;
+  background: linear-gradient(90deg, #10B981, #3B82F6);
+}
+
+/* Utility to slightly dim hover for header buttons */
+.header-action-hover:hover {
+  background-color: rgba(255,255,255,0.04);
+}
+
+/* Hide scrollbars globally (WebKit, Firefox, IE/Edge) */
+html, body, * {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* WebKit-based browsers */
+*::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  display: none;
+}
+
+/* Custom scrollbar for description section */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  display: block;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+
+.theme-light .custom-scrollbar {
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.theme-light .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced table styling for light mode */
+.theme-light .crypto-table-enhanced {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+  inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+}
+
+.theme-light .crypto-table-enhanced .ant-table-thead th {
+  background: linear-gradient(135deg, #071025 0%, #1b306b 100%);
+  border-bottom: 2px solid #1e3a8a;
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.theme-light .crypto-table-enhanced .ant-table-tbody tr {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(191, 219, 254, 0.3);
+}
+.crypto-table-enhanced .ant-table-container,
+.crypto-table-enhanced .ant-table-content {
+  border: 0 !important;
+}
+.crypto-table-enhanced .ant-table-thead > tr {
+  background: linear-gradient(135deg, #1e40af 0%, #2761ff 100%);
+}
+.crypto-table-enhanced .ant-table-thead > tr > th {
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  padding: 1rem !important;
+  border-bottom-width: 2px !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  border-bottom-color: #1e3a8a !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.crypto-table-enhanced .ant-table-tbody > tr > td {
+  padding: 1rem !important;
+  border-bottom-width: 1px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+}
+
+.theme-light .crypto-table-enhanced .ant-table-tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.theme-light .crypto-table-enhanced .ant-table-tbody tr:nth-child(odd) {
+  background-color: rgba(248, 250, 252, 0.8);
+}
+
+.theme-light .crypto-table-enhanced .ant-table-tbody tr:hover {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+.theme-dark .crypto-table-enhanced .ant-table-tbody > tr > td {
+  border-bottom-color: rgba(75, 85, 99, 0.3) !important;
+}
+/* Price change gradient text */
+.price-change-positive {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+.price-change-negative {
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+/* Global placeholder styles for all browsers */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important; /* Light text for dark theme */
+}
+
+.theme-light input::placeholder,
+.theme-light textarea::placeholder {
+  color: rgba(0, 0, 0, 0.5) !important; /* Dark text for light theme */
+}
+
+/* Webkit specific (Chrome, Safari, newer Edge) */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.theme-light input::-webkit-input-placeholder,
+.theme-light textarea::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Firefox specific */
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+  opacity: 1;
+}
+
+.theme-light input::-moz-placeholder,
+.theme-light textarea::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.5) !important;
+  opacity: 1;
+}
