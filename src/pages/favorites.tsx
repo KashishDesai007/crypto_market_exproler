@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Empty } from 'antd';
+import { Empty, Checkbox } from 'antd'; // <-- import Checkbox from antd
 import { Button } from '@/components/Button';
 import { useFavorites } from '@/context/FavoritesContext';
 import { useQuery } from '@tanstack/react-query';
@@ -20,8 +20,9 @@ export default function FavoritesPage() {
   const { data } = useCoins({ ids: favorites.ids });
   // Filter data to only include coins whose IDs are in favorites.ids
   const filteredData = data?.filter((coin: any) => favorites.ids.includes(coin.id)) ?? [];
-  console.log("Favorite Coins Data:", filteredData, favorites.ids.length > 0);
-  const allSelected = filteredData.length > 0 && favorites.selectedIds.length === filteredData.length;
+  const filteredSelectedIds = favorites.selectedIds.filter(id => filteredData.some((coin: any) => coin.id === id));
+  const allSelected = filteredData.length > 0 && filteredSelectedIds.length === filteredData.length;
+  const isIndeterminate = filteredSelectedIds.length > 0 && !allSelected;
 
   return (
     <>
@@ -51,18 +52,23 @@ export default function FavoritesPage() {
 
         {data && data.length > 0 && (
           <div className="flex items-center gap-3 mb-4 p-3 dark:bg-gray-800 rounded-lg">
-            <input
-              type="checkbox"
+            <Checkbox
               checked={allSelected}
-              onChange={() => allSelected ? deselectAllFavorites() : selectAllFavorites(data.map(coin => coin.id))}
-              className="w-4 h-4 rounded border-gray-300"
+              indeterminate={isIndeterminate}
+              onChange={() => {
+                if (allSelected) {
+                  deselectAllFavorites(filteredData.map((coin: any) => coin.id));
+                } else {
+                  selectAllFavorites(filteredData.map((coin: any) => coin.id));
+                }
+              }}
             />
             <span className={`${isDark ? 'text-gray-200' : 'text-gray-600'} text-sm font-medium`}>
               {allSelected ? 'Deselect All' : 'Select All'}
             </span>
             {hasSelected && (
               <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>
-                ({favorites.selectedIds.length} selected)
+                ({filteredSelectedIds.length} selected)
               </span>
             )}
           </div>

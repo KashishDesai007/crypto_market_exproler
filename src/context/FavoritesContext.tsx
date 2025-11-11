@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
+import CommonAlert from "@/components/CommonAlert";
+import { showAlert } from "@/components/showAlert";
 
 type FavoritesState = {
   ids: string[];
@@ -68,18 +70,24 @@ export const FavoritesProvider: React.FC<React.PropsWithChildren> = ({ children 
   const [state, dispatch] = useReducer(reducer, { ids: [], selectedIds: [] });
 
   useEffect(() => {
-    const raw = typeof window !== 'undefined' ? window.localStorage.getItem('favorites') : null;
-    if (raw) {
-      try {
+    try {
+      const raw = typeof window !== 'undefined' ? window.localStorage.getItem('favorites') : null;
+      if (raw) {
         const ids = JSON.parse(raw) as string[];
         dispatch({ type: 'hydrate', ids });
-      } catch {}
+      }
+    } catch (e: any) {
+      showAlert("Failed to load favorites", "error", e?.message || String(e));
     }
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('favorites', JSON.stringify(state.ids));
+    try {
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem('favorites', JSON.stringify(state.ids));
+      }
+    } catch (e: any) {
+      showAlert("Failed to save favorites", "error", e?.message || String(e));
     }
   }, [state.ids]);
 
@@ -97,11 +105,11 @@ export const FavoritesProvider: React.FC<React.PropsWithChildren> = ({ children 
     [state]
   );
 
-  return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
+  return (
+    <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>
+  );
 };
 
 export function useFavorites() {
   return useContext(FavoritesContext);
 }
-
-

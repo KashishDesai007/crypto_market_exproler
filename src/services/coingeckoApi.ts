@@ -1,6 +1,7 @@
 import BaseService from "./BaseService";
 import { FetchCoinsParams, Coin, CoinDetail } from "@/types/coin";
 import { MarketChartData } from "../queryModules/coingecko/types";
+import { showAlert } from "@/components/showAlert";
 
 export const fetchCoins = async (params: FetchCoinsParams = {}) => {
   try {
@@ -40,7 +41,8 @@ export const fetchCoins = async (params: FetchCoinsParams = {}) => {
     if (max_rank != null) data = data.filter((c) => (c.market_cap_rank ?? 0) <= max_rank);
 
     return data;
-  } catch (error) {
+  } catch (error: any) {
+    showAlert("Failed to fetch coins", "error", error.message || String(error));
     throw error;
   }
 };
@@ -58,7 +60,8 @@ export const fetchCoinById = async (id: string) => {
       }
     });
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
+    showAlert("Failed to fetch coin details", "error", error.message || String(error));
     throw error;
   }
 };
@@ -73,7 +76,8 @@ export const fetchCoinMarketChart = async (id: string, days: number = 7): Promis
       }
     });
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
+    showAlert("Failed to fetch market chart", "error", error.message || String(error));
     throw error;
   }
 };

@@ -38,7 +38,7 @@ const { theme } = useTheme();
               {coin.name} <span className="text-gray-400 text-sm">{coin.symbol.toUpperCase()}</span>
             </Link>
             <div
-              className={`text-sm ${isDark ? "text-gray-300" : "text-gray-700"} max-w-[130px] truncateoverflow-hidden whitespace-nowrap`}
+              className={`text-sm text-gray-300 truncateoverflow-hidden whitespace-nowrap`}
               title={`MCap: $${coin.market_cap.toLocaleString()}`}
             >
               MCap: ${coin.market_cap.toLocaleString()}

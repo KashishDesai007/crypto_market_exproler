@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
+import { ConfigProvider } from 'antd'; // Import ConfigProvider
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [scrollPercent, setScrollPercent] = useState(0);
@@ -19,12 +20,22 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col w-full">
-      <Header scrollPercent={scrollPercent} />
-      <main className="flex-1 w-full">
-        {children}
-      </main>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#2563eb', // Your primary color (example: Tailwind blue-600)
+          colorBgBase: '#f8fafc',  // Background color
+          colorTextBase: '#1e293b', // Text color
+        },
+      }}
+    >
+      <div className="min-h-screen flex flex-col w-full">
+        <Header scrollPercent={scrollPercent} />
+        <main className="flex-1 w-full">
+          {children}
+        </main>
+      </div>
+    </ConfigProvider>
   );
 };
 
